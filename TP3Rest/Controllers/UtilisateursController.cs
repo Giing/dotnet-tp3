@@ -66,7 +66,7 @@ namespace TP3Rest.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
         [ActionName("{id}")]
-        public async Task<IActionResult> PutUtilisateur(int id, Utilisateur utilisateur)
+        public async Task<IActionResult> PutUtilisateur([FromRoute] int id, Utilisateur utilisateur)
         {
             if (id != utilisateur.UtilisateurId)
             {
@@ -92,7 +92,7 @@ namespace TP3Rest.Controllers
         {
             await dataRepository.AddAsync(utilisateur);
 
-            return CreatedAtAction("GetUtilisateurById", new { id = utilisateur.UtilisateurId }, utilisateur);
+            return CreatedAtAction("GetUtilisateur", new { id = utilisateur.UtilisateurId }, utilisateur);
         }
 
         // DELETE: api/Utilisateurs/5
