@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using TP2Console.Models.EntityFramework;
+using TP3Rest.Models.DataManager;
+using TP3Rest.Models.EntityFramework;
+using TP3Rest.Models.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<SeriesDBContext>(options =>
   options.UseNpgsql(builder.Configuration.GetConnectionString("DBContext")));
+
+builder.Services.AddScoped<IDataRepository<Utilisateur>, UtilisateurManager>();
 
 builder.Services.AddControllers();
 

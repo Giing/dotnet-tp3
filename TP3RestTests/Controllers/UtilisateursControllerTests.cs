@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using TP3Rest.Models.EntityFramework;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using TP3Rest.Models.Repository;
+using TP3Rest.Models.DataManager;
 
 namespace TP3Rest.Controllers.Tests
 {
@@ -18,6 +20,7 @@ namespace TP3Rest.Controllers.Tests
     {
         private SeriesDBContext _context;
         private UtilisateursController _controller;
+        private IDataRepository<Utilisateur> _dataRepository;
 
         public UtilisateursControllerTests()
         {
@@ -25,7 +28,8 @@ namespace TP3Rest.Controllers.Tests
                 .UseNpgsql("Server=localhost;port=5432;Database=SeriesDB;uid=postgres;password=root;");
 
             _context = new SeriesDBContext(builder.Options);
-            _controller = new UtilisateursController(_context);
+            _dataRepository = new UtilisateurManager(_context);
+            _controller = new UtilisateursController(_dataRepository);
         }
 
         [TestMethod]
